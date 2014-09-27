@@ -1,0 +1,37 @@
+
+hadoop dfs -rmr output/graph_data/*
+hadoop jar build/GraphConstructorMapReduce.jar org.viirya.graph.GraphConstructorMapReduce data/flickr11k/features/textual 0.0001 compress
+hadoop dfs -mkdir data/flickr11k/graphs/textual/threshold_0.0001
+hadoop dfs -mv output/graph_data/graph/*.gz data/flickr11k/graphs/textual/threshold_0.0001/. 
+
+hadoop dfs -rmr output/graph_data/*
+hadoop jar build/GraphConstructorMapReduce.jar org.viirya.graph.GraphConstructorMapReduce data/flickr11k/features/textual 0.001 compress
+hadoop dfs -mkdir data/flickr11k/graphs/textual/threshold_0.001
+hadoop dfs -mv output/graph_data/graph/*.gz data/flickr11k/graphs/textual/threshold_0.001/. 
+
+hadoop dfs -rmr output/graph_data/*
+hadoop jar build/GraphConstructorMapReduce.jar org.viirya.graph.GraphConstructorMapReduce data/flickr11k/features/textual 0.01 compress
+hadoop dfs -mkdir data/flickr11k/graphs/textual/threshold_0.01
+hadoop dfs -mv output/graph_data/graph/*.gz data/flickr11k/graphs/textual/threshold_0.01/. 
+ 
+#for ((  i = 1 ;  i <= 9;  i++  ))
+#do
+#  hadoop dfs -rmr output/graph_data/*
+#  hadoop jar build/GraphConstructorMapReduce.jar org.viirya.graph.GraphConstructorMapReduce data/flickr11k/features/textual  0.0000$i compress
+#  hadoop dfs -mkdir data/flickr11k/graphs/textual/threshold_0.0000$i
+#  hadoop dfs -mv output/graph_data/graph/*.gz data/flickr11k/graphs/textual/threshold_0.0000$i/.
+#done
+
+#for ((  i = 1 ;  i <= 9;  i++  ))
+#do
+#  for ((  j = 1 ;  j <= 9;  j++  ))
+#  do
+#    hadoop dfs -rmr output/graph_data/*
+#    hadoop jar build/GraphConstructorMapReduce.jar org.viirya.graph.GraphConstructorMapReduce data/flickr11k/features/textual.partial/0.$i  0.0000$j compress
+#    hadoop dfs -mkdir data/flickr11k/graphs/textual.partial/0.$i
+#    hadoop dfs -mkdir data/flickr11k/graphs/textual.partial/0.$i/threshold_0.0000$j
+#    hadoop dfs -mv output/graph_data/graph/*.gz data/flickr11k/graphs/textual.partial/0.$i/threshold_0.0000$j/.
+#  done
+#done
+ 
+

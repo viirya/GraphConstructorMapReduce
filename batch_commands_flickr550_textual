@@ -1,0 +1,18 @@
+
+for ((  i = 7 ;  i <= 9;  i++  ))
+do
+  hadoop dfs -rmr output/graph_data/*
+  hadoop jar build/GraphConstructorMapReduce.jar org.viirya.graph.GraphConstructorMapReduce data/flickr550/features/flickr550.textual 0.000$i compress
+  hadoop dfs -mkdir data/flickr550/graph/flickr550.textual/threshold_0.000$i
+  hadoop dfs -mv output/graph_data/graph/*.gz data/flickr550/graph/flickr550.textual/threshold_0.000$i/.
+done
+
+for ((  i = 2 ;  i <= 5;  i++  ))
+do
+  hadoop dfs -rmr output/graph_data/*
+  hadoop jar build/GraphConstructorMapReduce.jar org.viirya.graph.GraphConstructorMapReduce data/flickr550/features/flickr550.textual 0.00$i compress
+  hadoop dfs -mkdir data/flickr550/graph/flickr550.textual/threshold_0.00$i
+  hadoop dfs -mv output/graph_data/graph/*.gz data/flickr550/graph/flickr550.textual/threshold_0.00$i/.
+done
+ 
+

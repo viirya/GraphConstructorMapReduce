@@ -1,0 +1,8 @@
+
+for ((  i = 2 ;  i <= 9;  i++  ))
+do
+  hadoop dfs -rmr output/graph_data/*
+  hadoop jar build/GraphConstructorMapReduce.jar org.viirya.graph.GraphConstructorMapReduce data/flickr11k/features/DoG10k_sparse 0.000$i compress
+  hadoop dfs -mkdir data/flickr11k/graphs/DoG10k_sparse/threshold_0.000$i
+  hadoop dfs -mv output/graph_data/graph/*.gz data/flickr11k/graphs/DoG10k_sparse/threshold_0.000$i/.
+done

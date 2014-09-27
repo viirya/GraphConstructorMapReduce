@@ -1,0 +1,27 @@
+
+#for ((  i = 9 ;  i <= 9;  i++  ))
+#do
+#  for ((  j = 1 ;  j <= 9;  j++  ))
+#  do
+#    hadoop dfs -rmr output/graph_data/*
+#    hadoop jar build/GraphConstructorMapReduce.jar org.viirya.graph.GraphConstructorMapReduceMinHash data/flickr11k/features/textual data/flickr11k/image_pools/textual/iterate$j 0.0000$i 0 compress
+#    hadoop dfs -mkdir data/flickr11k/graphs/textual/threshold_0.0000$i/min_hash_iterate$j
+#    hadoop dfs -mv output/graph_data/graph/*.gz data/flickr11k/graphs/textual/threshold_0.0000$i/min_hash_iterate$j/.
+#  done
+#done
+
+for ((  i = 5 ;  i <= 9;  i=i+2  ))
+do
+  for ((  j = 1 ;  j <= 9;  j=j+2  ))
+  do
+    for ((  k = 1 ;  k <= 9;  k++  ))
+    do
+      hadoop dfs -rmr output/graph_data/*
+      hadoop jar build/GraphConstructorMapReduce.jar org.viirya.graph.GraphConstructorMapReduceMinHash data/flickr11k/features/textual.partial/0.$i data/flickr11k/image_pools/textual/iterate$k 0.0000$j 0 compress
+      hadoop dfs -mkdir data/flickr11k/graphs/textual.partial/0.$i/threshold_0.0000$j/min_hash_iterate$k
+      hadoop dfs -mv output/graph_data/graph/*.gz data/flickr11k/graphs/textual.partial/0.$i/threshold_0.0000$j/min_hash_iterate$k/.
+    done
+  done
+done
+ 
+
